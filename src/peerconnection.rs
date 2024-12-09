@@ -15,7 +15,7 @@ use crate::error::{check, Error, Result};
 use crate::track::{RtcTrack, TrackHandler, TrackInit};
 use crate::{logger, DataChannelId, DataChannelInfo};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum ConnectionState {
     New,
     Connecting,
@@ -39,7 +39,7 @@ impl ConnectionState {
     }
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum GatheringState {
     New,
     InProgress,
@@ -57,7 +57,7 @@ impl GatheringState {
     }
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum SignalingState {
     Stable,
     HaveLocalOffer,
@@ -79,7 +79,7 @@ impl SignalingState {
     }
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum IceState {
     New,
     Checking,
@@ -105,7 +105,7 @@ impl IceState {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, PartialOrd, Hash)]
+#[derive(Debug, PartialEq, Eq, PartialOrd, Hash, Clone)]
 pub struct CandidatePair {
     pub local: String,
     pub remote: String,
@@ -151,7 +151,7 @@ pub mod serde_sdp {
     }
 }
 
-#[derive(Debug, PartialEq, Eq, Clone, Serialize, Deserialize)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum SdpType {
     Answer,
